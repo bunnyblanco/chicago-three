@@ -1,63 +1,37 @@
-Open311 API Python Wrapper
-==========================
+# chicago-three
+================
+Extend the Code for America's Open 311 wrapper to allow for non Open
+311 requests
 
-A Python API wrapper for the Open311 API v2.
+In Chicago, we have an [Open 311 System]
+(http://dev.cityofchicago.org/docs/api), but it [only supports 13
+services] (http://dev.cityofchicago.org/docs/api/service_list):
 
-Installation
-------------
-To successfully clone the repo, use the following command:
-```git clone --recursive git://github.com/codeforamerica/open311_python.git```
+- Abandoned Vehicles
+- Alley Light Out
+- Building Violation
+- Graffiti Removal
+- Pavement Cave-In Survey
+- Pothole in Street
+- Restaurant Complaint
+- Rodent Baiting / Rat Complaint
+- Sanitation Code Violation
+- Street Cut Complaints
+- Street Light Out
+- Traffic Signal Out
+- Tree Debris
 
-To install the wrapper, change directories into your local repository and run:
-```python setup.py install```
+The city provides many, many more services, and programatic access to
+service requests through web forms:
+https://servicerequest.cityofchicago.org/web_intake_chic/Controller
 
-Depending on security privileges on your computer, you may have to slightly augment the previous command:
-```sudo python setup.py install```
+The idea of this project is to extend the [Code For America's 311
+Python wrapper](https://github.com/codeforamerica/three) to provide a
+seamless interface to the rest of these 311 service types. Ideally,
+the user of this library should not need to know whether the service
+they care about is part of the Open 311 API.
 
-Usage
------
 
-The Python wrapper follows closely with the structure of the [Ruby
-Open311 API wrapper](https://github.com/codeforamerica/open311).
 
-```python
->>> from open311 import Open311
->>> o = Open311()
 
->>> # If you forgot to configure your instance.
-... o.configure(endpoint='http://open311.endpoint.com',
-...             api_key='my_api_key', jurisdiction='endpoint.com')
 
->>> # You can also reset your instance to its original state.
-... o.reset()
-
->>> # Receive a list of services available -- in dictionary form.
-... o.service_list()
-
->>> # Specific service definition.
-... o.service_definition('033')
-
->>> # Service requests.
-... o.service_requests()
-
->>> # Get a specific service request.
-... o.get_service_request('638344')
-
->>> # Post a service request.
-... o.post_service_request(
-...     service_code='001', address_string='123 Any Street',
-...     first_name='John', last_name='Smith',
-...     phone='111-111-1111', email='me@email.com',
-...     description='A large sinkhole is destroying the street',
-...     media_url='http://imgur.com/123_street_sinkhole.png')
-
->>> # Get a request id from a token.
-... o.request_id_from_token('123456')
-```
-
-Copyright
----------
-
-Copyright (c) 2011 Code for America Laboratories.
-
-See LICENSE for details.
